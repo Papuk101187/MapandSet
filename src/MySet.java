@@ -60,15 +60,13 @@ public class MySet<T> implements Iterable<T> {
     }
 
     public boolean contains(T elem) {
-        int hash = elem.hashCode(); // находим ХЕШКОД этого елемента;
-        int index = hash % buckets.length; // находим ИНДЕКС в контейнере путём деление на остаток на длину нашего контейнера;
+        int index = getIndex(elem);
         Node existElem = findElem(elem, index); // отравляем в метод поиска в контейнере (отправляем ЗНАЧЕНИЕ И ИНДЕКС);
         return existElem != null; // если не NULL возвращаем
     }
 
     public T find(T elem) {
-        int hash = elem.hashCode(); // находим ХЕШКОД этого елемента;
-        int index = hash % buckets.length; // находим ИНДЕКС в контейнере путём деление на остаток на длину нашего контейнера;
+        int index = getIndex(elem);
         Node existElem = findElem(elem, index); // отравляем в метод поиска в контейнере (отправляем ЗНАЧЕНИЕ И ИНДЕКС);
         return existElem != null ? (T) existElem.value : null;
     }

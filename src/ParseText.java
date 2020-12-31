@@ -4,20 +4,25 @@ import java.util.regex.Pattern;
 public class ParseText {
 
     MyMaps myMaps = new MyMaps();
-    int count = 1;
-    int countnew = 0;
 
     public ParseText(String s) {
 
 
         Pattern pattern = Pattern.compile("([A-Za-я]+)");
         Matcher matcher = pattern.matcher(s);
+        int coun = 1;
+
 
         while (matcher.find()) {
 
-            if (myMaps.put(matcher.group().toLowerCase(), count)) {
-                countnew = count + 1;
-                myMaps.put(matcher.group().toLowerCase(), countnew);
+            String string = matcher.group().toLowerCase();
+
+            if (myMaps.contains(string)) {
+                Integer integer = (Integer) myMaps.get(string);
+                int index = integer + 1;
+                myMaps.put(string, index);
+            } else {
+                myMaps.put(string, coun);
             }
 
 
