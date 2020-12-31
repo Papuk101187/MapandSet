@@ -2,7 +2,12 @@ import java.util.Iterator;
 
 public class MySetTEST<T> implements Iterable<T> {
 
-    public Node[] buckets = {new Node("Олег"),new Node("Владимир")};
+    public Node[] buckets = {
+            new Node("Олег"),
+            new Node("Владимир"),
+            new Node("Илья"),
+            new Node("Никита"),
+    };
 
     private int size = 0; // размер нашего контейнера;
     public int getSize() {
@@ -21,12 +26,9 @@ public class MySetTEST<T> implements Iterable<T> {
     public void find() {  //---- МЕТОД ДЛЯ ПОИСКА ОБЪЕКТА В КОНТЕЙНЕРЕ----//
         Node cur = buckets[0];
         Node cur1 = buckets[1];
-        System.out.println(cur.value);
         System.out.println(cur1.value);
 
-
     }
-
 
     private Node findElem(T elem, int bucketIndex) {  //---- МЕТОД ДЛЯ ПОИСКА ОБЪЕКТА В КОНТЕЙНЕРЕ----//
         for (Node cur = buckets[bucketIndex]; cur != null; cur = cur.next) { //---- проходимся по массиву с нашими Нодами;
@@ -39,9 +41,7 @@ public class MySetTEST<T> implements Iterable<T> {
 
     public void add(T elem) {   //---- МЕТОД ДЛЯ ДОБАВЛЕНИЯ ОБЪЕКТА В КОНТЕЙНЕР----//
         int hash = elem.hashCode(); // находим ХЕШКОД этого елемента;
-        System.out.println("add hash "+hash);
         int index = hash % buckets.length; // находим ИНДЕКС в контейнере путём деление на остаток на длину нашего контейнера;
-        System.out.println("add index "+index);
         Node existElem = findElem(elem, index); // отравляем в метод поиска в контейнере (отправляем ЗНАЧЕНИЕ И ИНДЕКС);
         if (existElem != null) { // если находим;
             existElem.value = elem; // присваваем значение в найденное ноде новое значение;
@@ -68,9 +68,7 @@ public class MySetTEST<T> implements Iterable<T> {
 
     public T find(T elem) {
         int hash = elem.hashCode(); // находим ХЕШКОД этого елемента;
-        System.out.println("find hash "+hash);
         int index = hash % buckets.length; // находим ИНДЕКС в контейнере путём деление на остаток на длину нашего контейнера;
-        System.out.println("find index "+index);
         Node existElem = findElem(elem, index); // отравляем в метод поиска в контейнере (отправляем ЗНАЧЕНИЕ И ИНДЕКС);
         return existElem != null? (T)existElem.value : null;
     }

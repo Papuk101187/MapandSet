@@ -1,21 +1,31 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ParseText {
 
     MyMaps myMaps = new MyMaps();
     int count = 1;
-    int countnew;
-
+    int countnew = 0;
 
     public ParseText(String s) {
 
-        for (int i = 0; i < s.split(" ").length; i++) {
-            if (myMaps.put(s.split(" ")[i], count)) {
+
+        Pattern pattern = Pattern.compile("([A-Za-я]+)");
+        Matcher matcher = pattern.matcher(s);
+
+        while (matcher.find()) {
+
+            if (myMaps.put(matcher.group().toLowerCase(), count)) {
                 countnew = count + 1;
-                myMaps.put(s.split(" ")[i], countnew);
+                myMaps.put(matcher.group().toLowerCase(), countnew);
             }
+
 
         }
 
+
     }
+
 
     public MyMaps getmyMaps() {
         return myMaps;
